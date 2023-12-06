@@ -1,0 +1,1 @@
+maneki-neko -lucky cat- (solid/filled) by GrAndAG on Thingiverse: https://www.thingiverse.com/thing:1328335
