@@ -1,3 +1,5 @@
+##Test commit 
+
 from pygame import mixer
 import time
 import schedule
@@ -16,7 +18,7 @@ def play_alarm():
     mixer.music.set_volume(0.7)
 
     # Display a message before starting the music
-    print("Time to take Med!!")
+    print("Time to take Med!!!")
 
     # Start playing the song
     mixer.music.play()
