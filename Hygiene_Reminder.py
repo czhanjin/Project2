@@ -8,9 +8,9 @@ def close_window():
 
 # Tkinter window
 root = tk.Tk()
-root.title("Activity Reminder")
+root.title("Hygiene Reminder")
 
-message_label = tk.Label(root, text="Hi, Mr. Lu! It's time to shake ur ass ;)", font=("Helvetica", 30))
+message_label = tk.Label(root, text="Hi, Mr. Li! It's time to shower!", font=("Helvetica", 30))
 message_label.pack(pady=20)
 
 # Button to close the window and stop audio
