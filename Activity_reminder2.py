@@ -1,7 +1,10 @@
 import requests
 import tkinter as tk
+from io import BytesIO
+from PIL import Image, ImageTk
 import threading
 import pygame
+#import os 
 
 def get_weather(api_key, city_name):
     base_url = "http://api.openweathermap.org/data/2.5/weather?"
@@ -19,7 +22,7 @@ def get_weather(api_key, city_name):
         if weather_data["cod"] == 200:
             # Extract relevant weather information
             main_data = weather_data["main"]
-            temperature = main_data["temp"] - 273.15  # Convert temperature to Celsius
+            temperature = ((main_data["temp"] - 273.15)*9/5)+32  # Convert temperature to Celsius
             pressure = main_data["pressure"]
             humidity = main_data["humidity"]
             weather_description = weather_data["weather"][0]["description"]
@@ -35,13 +38,13 @@ def get_weather(api_key, city_name):
         print(f"Status Code: {response.status_code}")
         return None
 
-def play_audio():
-    pygame.mixer.init()
-    pygame.mixer.music.load("bird.mp3")  
-    pygame.mixer.music.play()
+#def play_audio():
+    #pygame.mixer.init()
+    #pygame.mixer.music.load("bird.mp3")  
+    #pygame.mixer.music.play()
 
 def close_window():
-    pygame.mixer.music.stop()
+    #pygame.mixer.music.stop()
     root.destroy()
 
 # API key and city name
@@ -58,17 +61,32 @@ if weather_info:
     root = tk.Tk()
     root.title("Activity Reminder")
 
+    image_cold_path = "/Users/camilajin/Desktop/Project 2/cold.png"
+    image_hot_path = "/Users/camilajin/Desktop/Project 2/hot.png"
+    if temperature < 77: # 25C
+        imgcold = Image.open(image_cold_path)
+        imgcold = imgcold.resize((100,100), Image.ANTIALIAS)
+        tk_imgcold = ImageTk.PhotoImage(imgcold)
+        image_cold_label = tk.Label(root, image=tk_imgcold)
+        image_cold_label.pack()
+    else:
+        imghot = Image.open(image_hot_path)
+        imghot = imghot.resize((100,100), Image.ANTIALIAS)
+        tk_imghot = ImageTk.PhotoImage(imghot)
+        image_hot_label = tk.Label(root, image=tk_imghot)
+        image_hot_label.pack()
+
     message_label = tk.Label(
         root,
         text=(
-            "Hi, Mr. Li! It's time to move!\n"
-            f"This is today's weather in Philadelphia:\n"
-            f"Temperature: {temperature:.2f} C\n"
+            "Hi, Mr. Li, It's time to move!\n \n"
+            f"Today's weather in Philadelphia:\n"
+            f"Temperature: {temperature:.2f} F\n"
             f"Atmospheric Pressure: {pressure} hPa\n"
             f"Humidity: {humidity}%\n"
             f"Description: {weather_description}"
         ),
-        font=("Helvetica", 20)
+        font=("Helvetica",25)
     )
     message_label.pack(pady=20)
 
@@ -77,10 +95,10 @@ if weather_info:
     close_button.pack(pady=10)
 
     # Pop-up Window size
-    root.geometry("800x300")
+    root.geometry("800x500")
 
     # Audio playing
-    audio_thread = threading.Thread(target=play_audio)
-    audio_thread.start()
+    #audio_thread = threading.Thread(target=play_audio)
+    #audio_thread.start()
 
     root.mainloop()
