@@ -1,0 +1,28 @@
+Submission Time: 2023-12-06 04:11:10
+HI MR. LI! Did you have a good day?: Yes
+Were you able to get some physical activity?: Yes
+Have you brushed your teeth & showered?: Yes
+Have you taken your medicine?: Yes
+Have you reached out to family/friends today?: Yes
+How is your physical pain (1 = No Pain, 5 = Painful)?: 1
+What is your emotional level (1 = Happy, 5 = Sad)?: 1
+Traceback (most recent call last):
+  File "/home/awsuvarna/Project2/luckycat_dailyquestionnaire.py", line 162, in <module>
+    main()
+  File "/home/awsuvarna/Project2/luckycat_dailyquestionnaire.py", line 155, in main
+    root = tk.Tk()
+           ^^^^^^^
+  File "/usr/lib/python3.11/tkinter/__init__.py", line 2326, in __init__
+    self.tk = _tkinter.create(screenName, baseName, className, interactive, wantobjects, useTk, sync, use)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_tkinter.TclError: no display name and no $DISPLAY environment variable
+Traceback (most recent call last):
+  File "/home/awsuvarna/Project2/luckycat_dailyquestionnaire.py", line 162, in <module>
+    main()
+  File "/home/awsuvarna/Project2/luckycat_dailyquestionnaire.py", line 155, in main
+    root = tk.Tk()
+           ^^^^^^^
+  File "/usr/lib/python3.11/tkinter/__init__.py", line 2326, in __init__
+    self.tk = _tkinter.create(screenName, baseName, className, interactive, wantobjects, useTk, sync, use)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_tkinter.TclError: no display name and no $DISPLAY environment variable
