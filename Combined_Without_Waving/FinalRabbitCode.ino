@@ -80,20 +80,6 @@ void loop() {
 // Green = 0 0 255, Yellow = 185 0 70, Red = (255 0 0)
 int sensorValue = analogRead(voltagePin);
 float voltage = sensorValue * (9.0 / 1023.0);
-//Serial.print("\n Voltage: ");
-//Serial.print(voltage);
-//Serial.println(" V \n");
-//Serial.print("Sensor value:");
-//Serial.print(sensorValue);
-
-
-//if (voltage >= 8) {
- //setColor(0, 0, 255);  // GREEN
-//} else {
- //setColor(255, 0, 0);  // Yellow
-////else {
- //setColor(0, 0, 250);  // Blue
-
 
 value = analogRead(A0);
 voltage = value * (5.0/1024)*((R1 + R2)/R2);
@@ -109,28 +95,6 @@ if (voltage > 8) {
 }
 
 // Code 3 - Ultrasonic Sensor Servo
-/*digitalWrite(trigPin, LOW);
-delayMicroseconds(2);
-digitalWrite(trigPin, HIGH);
-delayMicroseconds(10);
-digitalWrite(trigPin, LOW);
-
-
-
-long duration = pulseIn(echoPin, HIGH);
-int distance = duration * 0.0343 / 2;
-
-
-Serial.print("Distance: ");
-Serial.print(distance);
-Serial.println(" cm");
-
-int servoAngle = map(distance, 5, 30, 0, 180);
-servoAngle = constrain(servoAngle, 0, 180);
-myServo.write(servoAngle);
-
-delay(500);
-*/
 long duration, distance;
 
 
@@ -163,9 +127,3 @@ long duration, distance;
  delay(500);
 }
 
-// Function to set RGB LED color
-//void setColor(int red, int green, int blue) {
-//analogWrite(redPin, red);
-//analogWrite(greenPin, green);
-//analogWrite(bluePin, blue);
-//}
