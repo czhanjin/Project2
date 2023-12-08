@@ -77,7 +77,7 @@ void loop() {
  }
 
 // Code 2 - RGB LED
-// Green = 0 0 255, Yellow = 185 0 70, Red = (255 0 0)
+
 int sensorValue = analogRead(voltagePin);
 float voltage = sensorValue * (9.0 / 1023.0);
 
@@ -111,7 +111,7 @@ long duration, distance;
  if (distance < 6 && distance !=0) {
    //Serial.print(distance);
    //Serial.println(" cm");
-   myServo.write(90);  // Rotate the servo to 180 degrees when distance is less than 5 cm
+   myServo.write(90);  
    servo1.write(90);
    servo2.write(90);
    delay(500);
