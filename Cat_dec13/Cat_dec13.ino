@@ -35,8 +35,11 @@ bool earState = false;    // the current state of LED
 int lastTouchState;    // the previous state of touch sensor
 int currentTouchState; // the current state of touch sensor
 
+const int arm_lower = 90;
+const int arm_upper = 60;
+
 void setup() {
-  Serial.begin(9600);
+  Serial.begin(115200);
   pinMode(touchSensorPin, INPUT);
   currentTouchState = digitalRead(touchSensorPin);
   
@@ -61,7 +64,7 @@ void setup() {
   servoMed.write(angle_initial);
 
   servoArm.attach(servoPin);
-  servoArm.write(0);
+  servoArm.write(arm_lower);
 }
 
 void loop(){
@@ -102,7 +105,6 @@ void pettingHead(){
   }
 }
 
-
 void earFlapping(){
   servoEar2.write(120);
   servoEar1.write(60);
@@ -125,9 +127,9 @@ VL53L0X_RangingMeasurementData_t measure;
       delay(1000);
       servoMed.write(angle_initial);
       delay(500);
-      Serial.print("Distance: ");
-      Serial.print(distance);
-      Serial.print(" mm, Servo Angle: ");
+//      Serial.print("Distance: ");
+//      Serial.print(distance);
+//      Serial.print(" mm, Servo Angle: ");
     } else {
       servoMed.write(angle_initial);
       delay(100);
@@ -155,12 +157,12 @@ void armWaving(){
 
 
 void moveServo(){
-  servoArm.write(0);
+  servoArm.write(arm_upper);
   delay(500);
-  servoArm.write(90);
+  servoArm.write(arm_lower);
   delay(500);
-  servoArm.write(0);
+  servoArm.write(arm_upper);
   delay(500);
-  servoArm.write(90);
+  servoArm.write(arm_lower);
   delay(500);
   }
