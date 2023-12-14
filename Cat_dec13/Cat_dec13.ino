@@ -24,16 +24,21 @@ Servo servoArm; // servo for arm
 Servo servoMed;
 Adafruit_VL53L0X lox = Adafruit_VL53L0X();
 bool isSwitchOn = false;
+const int angle_initial = 40;
 
 
 //int fsrPin = 1;     // the FSR and 10K pulldown are connected to a0
 //int fsrReading;     // the analog reading from the FSR resistor divider
 //int threshold = 500; // threshold value of the FSR reading to turn LED on/off 
 
+bool earState = false;    // the current state of LED
+int lastTouchState;    // the previous state of touch sensor
+int currentTouchState; // the current state of touch sensor
 
 void setup() {
   Serial.begin(9600);
   pinMode(touchSensorPin, INPUT);
+  currentTouchState = digitalRead(touchSensorPin);
   
   pinMode(trigPin, OUTPUT);
   pinMode(echoPin, INPUT);
@@ -53,7 +58,7 @@ void setup() {
     while (1);
   }
   servoMed.attach(13);
-  servoMed.write(0);
+  servoMed.write(angle_initial);
 
   servoArm.attach(servoPin);
   servoArm.write(0);
@@ -63,6 +68,8 @@ void loop(){
   voltageMeasurement();
   pettingHead();
   medDispenser();
+  armWaving();
+  // earFlapping();
 }
 
 
@@ -82,48 +89,23 @@ void voltageMeasurement(){
 }      
 }
 
+void pettingHead(){ 
+  lastTouchState    = currentTouchState;             // save the last state
+  currentTouchState = digitalRead(touchSensorPin); // read new state
+  Serial.print("Current Touch State: ");
+  Serial.println(currentTouchState);
 
-/*void pettingHead(){
-  fsrReading = analogRead(fsrPin);  // reading FSR value from A0 pin
-  Serial.print("Analog reading = ");
-  Serial.println(fsrReading);
-  
-  if (fsrReading > 500){
-    Serial.println("Switch status: ON");
+  if(lastTouchState == LOW && currentTouchState == HIGH) {
+    Serial.println("The sensor is touched");
+    earFlapping();
     earFlapping();
   }
-  else{ // otherwise, turn LED off
-    Serial.println("Switch status: OFF");
-    servoEar1.write(90);
-  	servoEar2.write(90);
-  }
-  Serial.println();
-delay(50);
 }
-*/
- void pettingHead(){
- int touchState = digitalRead(touchSensorPin);
- if (touchState == HIGH) {
-   if (!isSwitchOn) {
-     Serial.println("Switch ON");
-     isSwitchOn = true;
-     earFlapping();
-   }
- } else {
-   if (isSwitchOn) {
-     Serial.println("Switch OFF");
-     isSwitchOn = false;
-     servoEar1.write(90);
-     servoEar2.write(90);
-     delay(100); 
-     digitalWrite(touchSensorPin, LOW);
-   }
-  }
- }
+
 
 void earFlapping(){
-  servoEar1.write(180);
-  servoEar2.write(180);
+  servoEar2.write(120);
+  servoEar1.write(60);
   delay(500);
   servoEar1.write(90);
   servoEar2.write(90);
@@ -138,21 +120,47 @@ VL53L0X_RangingMeasurementData_t measure;
   if (measure.RangeStatus != 4) {  // Check if measurement is valid
     int distance = measure.RangeMilliMeter;
 
-    if (distance < 60 && distance != 0) {
-      servoMed.write(90);
+    if (distance < 80 && distance != 0) {
+      servoMed.write(angle_initial+90);
       delay(1000);
-      servoMed.write(0);
+      servoMed.write(angle_initial);
       delay(500);
       Serial.print("Distance: ");
       Serial.print(distance);
       Serial.print(" mm, Servo Angle: ");
     } else {
-      servoMed.write(0);
+      servoMed.write(angle_initial);
       delay(100);
-      Serial.print("Distance: ");
-      Serial.println(distance);
+      // Serial.print("Distance: ");
+      // Serial.println(distance);
     }
   }
   delay(100);  
   
 }
+
+void armWaving(){
+  if (Serial.available() > 0){
+  int data = Serial.read() - '0';
+
+  switch (data){
+    case 1:
+      moveServo();
+      break;
+    default:
+      break;
+    }
+  }
+}
+
+
+void moveServo(){
+  servoArm.write(0);
+  delay(500);
+  servoArm.write(90);
+  delay(500);
+  servoArm.write(0);
+  delay(500);
+  servoArm.write(90);
+  delay(500);
+  }
