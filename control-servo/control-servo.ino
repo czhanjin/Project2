@@ -7,7 +7,7 @@ void setup() {
   // put your setup code here, to run once:
   Serial.begin(9600);
   Servo1.attach(servoPin);
-  Servo1.write(0);
+  Servo1.write(70);
 }
 
 void loop() {
@@ -27,11 +27,11 @@ void loop() {
 }
 
 void moveServo(){
-  Servo1.write(0);
+  Servo1.write(60);
   delay(500);
   Servo1.write(90);
   delay(500);
-  Servo1.write(0);
+  Servo1.write(60);
   delay(500);
   Servo1.write(90);
   delay(500);
