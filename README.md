@@ -1,9 +1,10 @@
 # BE5140 Project2 Social robot
+
+Latest Arduino code: Cat_dec13
+
+Tet up cron jobs in RPi, run this CLI command `cronjob -a` and fill in the following commands to set up reminders with scheduled time. Arm waving is executed simultaneously with scheduled reminders.
 ```
-cronjob -a
-```
-```
-0 20 * * * export DISPLAY=:0 && export XAUTHORITY=/home/awsuvarna/.Xauthority && /usr/bin/python3 /home/awsuvarna/Project2/luckycat_dailyquestionnaire.py >> /home/awsuvarna/Project2/questionnaire_log.txt 2>&1
+0 20 * * * export DISPLAY=:0 && export XAUTHORITY=~/.Xauthority && /usr/bin/python3 ~/Project2/luckycat_dailyquestionnaire.py >> ~/Project2/questionnaire_log.txt 2>&1
 0 8,9,10,12,19,20 * * * export XAUTHORITY=~/.Xauthority && /usr/bin/python3 ~/Project2/control-servo.py >> ~/Project2/questionnaire_log.txt 2>&1
 0 12 * * * export DISPLAY=:0 && export XAUTHORITY=~/.Xauthority && /usr/bin/python3 ~/Project2/Activity_reminder_final.py >> ~/Project2/questionnaire_log.txt 2>&1
 0 8,19 * * * export DISPLAY=:0 && export XAUTHORITY=~/.Xauthority && /usr/bin/python3 ~/Project2/Teeth_reminder_final.py >> ~/Project2/questionnaire_log.txt 2>&1
