@@ -1,6 +1,10 @@
 # BE5140 Project2 Social robot
 
-Latest Arduino code: Cat_dec13
+Latest Arduino code: [Cat_dec13](https://github.com/czhanjin/Project2/tree/master/Cat_dec13)
+
+[CAD files](https://github.com/czhanjin/Project2/tree/master/LUCKE-CAD/Frame)
+
+[Demo Video](https://www.youtube.com/watch?v=4yg1J_LsbSY) 
 
 To set up cron jobs in RPi, run this CLI command `cronjob -a` and fill in the following commands to set up reminders with scheduled time. Arm waving is executed simultaneously with scheduled reminders.
 ```
@@ -15,5 +19,4 @@ To demo a reminder with arm waving, use this cron jobs to see the behaviors ever
 ```
 * * * * * export XAUTHORITY=~/.Xauthority && /usr/bin/python3 ~/Project2/control-servo.py >> ~/Project2/questionnaire_log.txt 2>&1
 * * * * * export DISPLAY=:0 && export XAUTHORITY=~/.Xauthority && /usr/bin/python3 ~/Project2/Medicine_reminder_final.py >> ~/Project2/questionnaire_log.txt 2>&1
-
 ```
